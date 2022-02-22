@@ -1,0 +1,40 @@
+version: '3.3'
+services:
+  task-api:
+    container_name: task-api
+    build:
+      context: './'
+      dockerfile: ./devops/Dockerfile
+
+    ports:
+      - '3000:3000'
+    depends_on:
+      - postgres
+    networks:
+      - pg-test
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=parser
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORTS=54321312321321312321
+      - PGDATA=/postgres-data
+
+    ports:
+      - 10
+    volumes:
+      - ./devops/postgres-data:/var/lib/postgresql/data
+      - ./devops/database/database.sql:/docker-entrypoint-initdb.d/database.sql
+    networks:
+      - pg-test
+
+networks:
+  pg-test:
+    external: true
+      
+

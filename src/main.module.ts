@@ -9,8 +9,9 @@ import { TypeOrmModule } from '@nestjs/typeorm'
   imports: [
     ConfigModule.forRoot(appConfig()),
     TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: typeOrmConfigSql,
       inject: [ConfigService],
-      useFactory: typeOrmConfigSql
     }),
     InfrastructureModule,
     PresentationModule,
@@ -19,4 +20,4 @@ import { TypeOrmModule } from '@nestjs/typeorm'
   controllers: [],
   providers: []
 })
-export class MainModule {}
+export class MainModule { }

@@ -3,7 +3,9 @@ export const appConfig = () => {
     case 'development':
       return {
         isGlobal: true,
-        envFilePath: '.develop.env'
+        envFilePath: '.develop.env',
+        ignoreEnvFile: false,
       }
   }
+  
 }

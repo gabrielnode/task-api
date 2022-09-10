@@ -1,13 +1,9 @@
-FROM node:10 AS installer
+FROM node:16 AS installer
 WORKDIR /app
 COPY . .
 RUN rm -rf node_modules
 RUN npm install
 RUN npm run build
+EXPOSE 3000
 
-
-
-FROM node:10-alpine
-WORKDIR /app
-COPY --from=installer /app ./
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:debug"]

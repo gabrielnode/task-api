@@ -5,14 +5,14 @@ services:
     build:
       context: './'
       dockerfile: ./devops/Dockerfile
-
+    volumes:
+      - .:/app
     ports:
       - '3000:3000'
     depends_on:
       - postgres
     networks:
-      - pg-test
-
+      - pg
   postgres:
     container_name: postgres
     image: postgres
@@ -22,19 +22,16 @@ services:
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=parser
       - POSTGRES_HOST=postgres
-      - POSTGRES_PORTS=54321312321321312321
+      - POSTGRES_PORTS=5432
       - PGDATA=/postgres-data
-
     ports:
-      - 10
+      - '5432:5432'
     volumes:
       - ./devops/postgres-data:/var/lib/postgresql/data
       - ./devops/database/database.sql:/docker-entrypoint-initdb.d/database.sql
     networks:
-      - pg-test
+      - pg
 
 networks:
-  pg-test:
+  pg:
     external: true
-      
-

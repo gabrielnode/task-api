@@ -4,8 +4,7 @@ export const appConfig = () => {
       return {
         isGlobal: true,
         envFilePath: '.develop.env',
-        ignoreEnvFile: false,
+        ignoreEnvFile: false
       }
   }
-  
 }

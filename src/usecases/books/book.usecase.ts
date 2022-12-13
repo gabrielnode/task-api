@@ -1,4 +1,3 @@
-import { IBookRepository } from '@/domain/repositories/book.interface'
 import { BookRepository } from '@/infrastructure/repositories'
 import { BookDTO } from '@/shared'
 import { Injectable } from '@nestjs/common'
@@ -13,5 +12,9 @@ export class BookUsecase {
 
   async addBook(data: BookDTO) {
     return this.bookRepository.addNew(data)
+  }
+
+  async addBooks(data: BookDTO[]) {
+    return this.bookRepository.addManyNew(data)
   }
 }
